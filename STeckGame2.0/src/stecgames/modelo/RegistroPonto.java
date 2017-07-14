@@ -11,6 +11,7 @@ package stecgames.modelo;
  */
 public class RegistroPonto {
     private int id;
+    private String matricula;
     private String nome;
     private String opcao;
     private String data;
@@ -19,8 +20,9 @@ public class RegistroPonto {
     public RegistroPonto() {
     }
 
-    public RegistroPonto(int id, String nome, String opcao, String data, String hora) {
+    public RegistroPonto(int id, String matricula, String nome, String opcao, String data, String hora) {
         this.id = id;
+        this.matricula = matricula;
         this.nome = nome;
         this.opcao = opcao;
         this.data = data;
@@ -35,6 +37,14 @@ public class RegistroPonto {
         this.id = id;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -47,8 +57,8 @@ public class RegistroPonto {
         return opcao;
     }
 
-    public void setOpção(String opção) {
-        this.opcao = opção;
+    public void setOpcao(String opcao) {
+        this.opcao = opcao;
     }
 
     public String getData() {
@@ -66,6 +76,7 @@ public class RegistroPonto {
     public void setHora(String hora) {
         this.hora = hora;
     }
+
     
     
             

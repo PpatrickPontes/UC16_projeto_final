@@ -31,8 +31,8 @@ public class RegistroPontoDAO {
         conn = ConnectionFactory.getConnection();
         
         // Comando SQL 
-        SQL = "INSERT INTO tb_registroponto  (nome, opcao, data, hora)" +
-                                     "VALUES (?, ?, ?, ?)";
+        SQL = "INSERT INTO tb_registroponto  (nome, opcao, data, hora, matricula)" +
+                                     "VALUES (?, ?, ?, ?, ?)";
 
         preparedStatement = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
 
@@ -40,7 +40,7 @@ public class RegistroPontoDAO {
         preparedStatement.setString(2, r.getOpcao());        
         preparedStatement.setString(3, r.getData());
         preparedStatement.setString(4, r.getHora());
-               
+        preparedStatement.setString(5, r.getMatricula());       
        
         
         // Executa no BD        
@@ -59,14 +59,14 @@ public class RegistroPontoDAO {
         
     }
     
-    /*
-    public static ArrayList listar(String pessoa) throws SQLException, ClassNotFoundException{
+    
+    public static ArrayList listar(String nome) throws SQLException, ClassNotFoundException{
         
         Connection conn = null;
         PreparedStatement  preparedStatement = null;
         ResultSet rs = null;
         String SQL = "";
-        ArrayList<Pessoa> lista = new ArrayList<>();
+        ArrayList<RegistroPonto> lista = new ArrayList<>();
                 
         // Obtem conexao com BD
         conn = ConnectionFactory.getConnection();
@@ -76,9 +76,9 @@ public class RegistroPontoDAO {
 
         preparedStatement = conn.prepareStatement(SQL);
         
-        pessoa = "%" + pessoa + "%";
+        nome = "%" + nome + "%";
         
-        preparedStatement.setString(1, pessoa);
+        preparedStatement.setString(1, nome);
 
         // Para buscar informações
         rs = preparedStatement.executeQuery();   
@@ -86,10 +86,12 @@ public class RegistroPontoDAO {
         // Verifica se possui dados
         while (rs.next()) {
             
-            Pessoa p = new Pessoa();
+            RegistroPonto p = new RegistroPonto();
             
             p.setNome(rs.getString("nome"));
-            p.setIdade(rs.getInt("idade"));
+            
+                    
+            //Ainda nao acabou
                       
             lista.add(p);
          } 
@@ -99,9 +101,9 @@ public class RegistroPontoDAO {
         
         return lista;
     }
-     */
-    /*
-    public static void atualizar(Cliente c) throws SQLException, ClassNotFoundException{
+     
+    
+    public static void atualizar(RegistroPonto rp) throws SQLException, ClassNotFoundException{
         
         Connection conn = null;
         PreparedStatement  preparedStatement = null;
@@ -115,26 +117,19 @@ public class RegistroPontoDAO {
        // Comando SQL 
         SQL = "UPDATE cliente " +
               " SET nome = ?, " +
-              " rua = ?, " +
-              " bairro = ?, " +
-              " numero = ?," + 
-              " condominio =?,"+
-              " bloco=?,"+ 
-              " apartamento=?,"+
-              " obs_cliente=? "+   
-              " where id_cliente = ? ";
+              " opcao = ?, " +
+              " data = ?, " +
+              " hora = ?" +               
+              " where id_ponto = ? ";
 
         preparedStatement = conn.prepareStatement(SQL);
 
-        preparedStatement.setString(1, c.getNome()); 
-        preparedStatement.setString(2, c.getRua());
-        preparedStatement.setString(3, c.getBairro()); 
-        preparedStatement.setString(4, c.getNumero());
-        preparedStatement.setString(5, c.getCondominio()); 
-        preparedStatement.setString(6, c.getBloco());
-        preparedStatement.setString(7, c.getApartamento()); 
-        preparedStatement.setString(8, c.getObs_cliente());
-         preparedStatement.setInt(9, c.getId_cliente());
+        preparedStatement.setString(1, rp.getNome()); 
+        preparedStatement.setString(2, rp.getOpcao());
+        preparedStatement.setString(3, rp.getData()); 
+        preparedStatement.setString(4, rp.getHora());
+        preparedStatement.setInt(5,rp.getId()); 
+       
         
        // Dispara comando SQL para o banco de dados
         int qtdLinhas = preparedStatement.executeUpdate();  
@@ -149,7 +144,7 @@ public class RegistroPontoDAO {
         conn.close();
        
     } 
-    */
+    
     /*
     public static void excluir(Cliente c) throws SQLException, ClassNotFoundException{
         Connection conn = null;

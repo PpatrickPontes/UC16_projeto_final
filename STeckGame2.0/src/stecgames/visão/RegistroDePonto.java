@@ -33,7 +33,7 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         txtData.setText(dateFormat.format(date));
-         Timer timer = new Timer(1000, new hora());
+        Timer timer = new Timer(1000, new hora());
         timer.start();
         
         this. tableRegPonto = new TableModelRegPonto();
@@ -58,7 +58,9 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
 
         for(Funcionarios f:lista){          
             
-            txtNome.setText(f.getNome());           
+            txtNome.setText(f.getNome());
+            txtMatricula.setText(Integer.toString(f.getMatricula()));
+            
         }
     }
     @SuppressWarnings("unchecked")
@@ -76,6 +78,8 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
         txtHora = new javax.swing.JLabel();
         cbOpcao = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtMatricula = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -124,6 +128,10 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("Matricula:");
+
+        txtMatricula.setText("*****");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,20 +153,29 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
                             .addComponent(cbOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jButton2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtNome)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton1)))))))
+                                        .addComponent(txtMatricula))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtNome)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jButton1))))))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtMatricula))
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,7 +191,7 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)))
                 .addGap(7, 7, 7)
                 .addComponent(cbOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(21, 21, 21))
         );
@@ -212,9 +229,10 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
                     
                 break;
         }       
-        c.setOpção(opcao);
+        c.setOpcao(opcao);
         c.setData(txtData.getText());
         c.setHora(txtHora.getText());
+        c.setMatricula(txtMatricula.getText());
         
         try{
             RegistroPontoDAO.inserir(c);
@@ -269,10 +287,12 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablePonto;
     private javax.swing.JLabel txtData;
     private javax.swing.JLabel txtHora;
+    private javax.swing.JLabel txtMatricula;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 
