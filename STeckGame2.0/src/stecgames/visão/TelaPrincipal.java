@@ -39,6 +39,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 vendasMenu.setEnabled(false);
                 cursosMenu.setEnabled(false);
                 comprasMenu.setEnabled(false);
+                mBackup.setEnabled(false);
                 break; 
                 
             case "MKG":
@@ -51,6 +52,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 vendasMenu.setEnabled(false);
                 cursosMenu.setEnabled(false);
                 comprasMenu.setEnabled(false);
+                  mBackup.setEnabled(false);
                 break; 
                 
             case "ALM":
@@ -63,6 +65,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 vendasMenu.setEnabled(false);
                 cursosMenu.setEnabled(false);
                 comprasMenu.setEnabled(true);
+                  mBackup.setEnabled(false);
                 break;
                 
             case "CUR":
@@ -75,6 +78,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 vendasMenu.setEnabled(false);
                 cursosMenu.setEnabled(true);
                 comprasMenu.setEnabled(false);
+                  mBackup.setEnabled(false);
                 break;
                 
                 case "VND":
@@ -87,6 +91,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 vendasMenu.setEnabled(true);
                 cursosMenu.setEnabled(false);
                 comprasMenu.setEnabled(false);
+                  mBackup.setEnabled(false);
                 break; 
         }
         
@@ -121,6 +126,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         vendasMenu = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        mBackup = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,6 +231,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu);
 
+        mBackup.setText("Backup");
+
+        jMenuItem1.setText("Exportar banco de dados");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mBackup.add(jMenuItem1);
+
+        jMenuItem6.setText("Importar banco de dados");
+        mBackup.add(jMenuItem6);
+
+        jMenuBar1.add(mBackup);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -310,6 +333,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         altSenha.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+     BackupImportar  importarBd = new  BackupImportar();
+     JdpPrincipal.add(importarBd);
+     importarBd.setLocation(JdpPrincipal.getWidth()/2 - importarBd.getWidth()/2,
+                            JdpPrincipal.getHeight()/2 - importarBd.getHeight()/2);
+     importarBd.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -361,13 +393,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jmCadastroFunc;
     private javax.swing.JMenuItem jmMotivosOcorrencias;
     private javax.swing.JMenuItem jmProsSeletivo;
+    private javax.swing.JMenu mBackup;
     private javax.swing.JMenu marketingMenu;
     private javax.swing.JMenu rhMenu;
     private javax.swing.JMenu vendasMenu;

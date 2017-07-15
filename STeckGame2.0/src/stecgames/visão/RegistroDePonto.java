@@ -33,6 +33,7 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         txtData.setText(dateFormat.format(date));
+        
         Timer timer = new Timer(1000, new hora());
         timer.start();
         
