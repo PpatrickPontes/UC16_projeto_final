@@ -206,8 +206,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtNum" min="-2" pref="73" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="txtBairro" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="txtBairro" min="-2" pref="319" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -314,6 +314,9 @@
               <Format format="#####-###" subtype="-1" type="5"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCepKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

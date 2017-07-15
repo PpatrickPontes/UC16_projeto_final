@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import stecgame.controle.ControleLimiteDigitos;
 import stecgame.controle.ControleLimiteDigitos_numeros;
+import stecgame.utilitarios.WebServiceCep;
 import stecgames.modelo.Funcionarios;
 import stecgames.modelo.TableModelFunc;
 import stecgames.persistencia.FuncionariosDAO;
@@ -37,10 +38,10 @@ public class CadastroFunc extends javax.swing.JInternalFrame {
         txtNomePai.setDocument(new ControleLimiteDigitos(150));
         txtNomeMae.setDocument(new ControleLimiteDigitos(150));
         txtRespTelRecados.setDocument(new ControleLimiteDigitos(150));
-        txtRua.setDocument(new ControleLimiteDigitos(150));
-        txtBairro.setDocument(new ControleLimiteDigitos(100));
+        //txtRua.setDocument(new ControleLimiteDigitos(150));
+        //txtBairro.setDocument(new ControleLimiteDigitos(100));
         txtPracaBanco.setDocument(new ControleLimiteDigitos(11));
-        txtMunicipio.setDocument(new ControleLimiteDigitos(45));
+        //txtMunicipio.setDocument(new ControleLimiteDigitos(45));
         txtNomeBanco.setDocument(new ControleLimiteDigitos(45));       
         txtCargo.setDocument(new ControleLimiteDigitos(45));
         txtEstadoCivil.setDocument(new ControleLimiteDigitos(45));
@@ -368,6 +369,11 @@ public class CadastroFunc extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCepKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -387,7 +393,7 @@ public class CadastroFunc extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtBairro)
+                        .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2428,6 +2434,23 @@ public class CadastroFunc extends javax.swing.JInternalFrame {
         setarTextField();
     }//GEN-LAST:event_tableFuncionariosMouseClicked
 
+    private void txtCepKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyReleased
+        // TODO add your handling code here:
+        
+        String cp = txtCep.getText();
+    cp = cp.replaceAll("\\D*", ""); //ignora qualquer coisa que não seja numero.  
+    int cont = cp.length();
+    
+    if(cont == 8){
+     try{
+     correio();
+     }
+     catch(Error e){
+     JOptionPane.showMessageDialog(null, e); 
+     }
+    }
+    }//GEN-LAST:event_txtCepKeyReleased
+
       
        
     
@@ -2544,4 +2567,27 @@ public class CadastroFunc extends javax.swing.JInternalFrame {
     void setLocationRelativeTo(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public  void correio() {
+    
+                String cep =  txtCep.getText();
+		
+                WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
+
+		if (webServiceCep.wasSuccessful()) {
+                       
+                        txtRua.setText(webServiceCep.getLogradouroFull()); 
+                        txtBairro.setText(webServiceCep.getBairro());                        
+                        txtMunicipio.setText(webServiceCep.getCidade());
+                        txtUf.setText( webServiceCep.getUf());
+
+		} else {
+                    if(!webServiceCep.getResultText().isEmpty()){
+                        JOptionPane.showMessageDialog(null,"CEP não encontrado, favor conferir se está correto \n"
+                                + " ou preencher manualmente");
+                    }
+                        
+                        
+		}
+			
+	}
 }
