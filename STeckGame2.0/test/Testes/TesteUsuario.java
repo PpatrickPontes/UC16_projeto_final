@@ -12,9 +12,11 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import stecgames.modelo.Funcionarios;
+import stecgames.modelo.RegistroPonto;
 import stecgames.persistencia.UsuarioDAO;
 import stecgames.modelo.Usuario;
 import stecgames.persistencia.FuncionariosDAO;
+import stecgames.persistencia.RegistroPontoDAO;
 
 /**
  *
@@ -134,26 +136,66 @@ public class TesteUsuario {
         
   */      
     
-/*
+
      // Testar - Listar
-        ArrayList<Usuario> lista = null;
+        ArrayList<RegistroPonto> lista = null;
         
-        String palavra = "a";
+        String palavra = "Ferdinando";
         
         try{
-            lista = UsuarioDAO.listar(palavra);
+            lista = RegistroPontoDAO.listar(palavra);
         }catch(Exception e){
             e.printStackTrace();
             return;
         }
 
-        for(Usuario u:lista){
-            System.out.println("Usuario: " + 
-                    u.getNome() + " - " + 
-                    u.getLogin());
+        for(RegistroPonto rp:lista){
+          
+            
+            
+           System.out.println(rp.getMatricula()+"\n"
+                                +rp.getNome()+"\n"
+                                +rp.getData()+"\n"
+                                +rp.getHora_entrada()+"\n"
+                                +rp.getSaida_almoco()+"\n"
+                                +rp.getRetorn_almoco()+"\n"
+                                +rp.getHora_saida());
+           
+        String horaEnt = rp.getHora_entrada();
+        String horaSai = rp.getHora_saida();
+        int aux = 0;
+        int hent = 0;
+        int hsai = 0;
+        
+        if(!horaEnt.isEmpty()){
+           horaEnt = horaEnt.substring(6,horaEnt.length());
+           hent = Integer.parseInt(horaEnt);                 
+        }
+        if(!horaSai.isEmpty()){
+           horaSai = horaSai.substring( horaSai.length()-6);
+           hsai = Integer.parseInt(horaSai);                 
         }
         
-  */
+        aux =  hsai - hent;
+        
+        System.out.println(aux);  
+       /*    
+        String expMes = txtDtExpedicao.getText();
+        String expDia = txtDtExpedicao.getText();
+        int expmes = 0;
+        int expdia = 0;
+        //Subtrai 3 primeiros caracters e subtrai os 5 ultimos assim deixando somente o mes  
+        if (!expMes.isEmpty()){
+        expMes = expMes.substring(3, expMes.length()-5);
+       expmes= Integer.parseInt(expMes);
+        } 
+        */   
+           
+        }
+        
+     }
+        
+  
  /*
         //-----------------------------------------------------
         // Testar - INSERIR
@@ -276,7 +318,7 @@ public class TesteUsuario {
         System.out.println(formatado);
         //O resultado é R$ 12.000.000,12
      */ 
-        
+       /* 
         //calculo de ano bi sexto
        int ano = 1985;
    
@@ -286,7 +328,7 @@ public class TesteUsuario {
         else{
            System.out.println("Ano normal");
         } 
-        
+       */ 
     }
  
-}
+

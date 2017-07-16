@@ -31,18 +31,18 @@ public class RegistroPontoDAO {
         conn = ConnectionFactory.getConnection();
         
         // Comando SQL 
-        SQL = "INSERT INTO tb_registroponto  (nome, opcao, data, hora, matricula)" +
-                                     "VALUES (?, ?, ?, ?, ?)";
+        SQL = "INSERT INTO tb_registroponto  (nome, data, hora_entrada, saida_almoco, retorn_almoco, hora_saida, matricula)" +
+                                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         preparedStatement = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
 
         preparedStatement.setString(1, r.getNome());
-        preparedStatement.setString(2, r.getOpcao());        
-        preparedStatement.setString(3, r.getData());
-        preparedStatement.setString(4, r.getHora());
-        preparedStatement.setString(5, r.getMatricula());       
-       
-        
+        preparedStatement.setString(2,r.getData() );        
+        preparedStatement.setString(3, r.getHora_entrada());
+        preparedStatement.setString(4, r.getSaida_almoco() );
+        preparedStatement.setString(5, r.getRetorn_almoco() );       
+        preparedStatement.setString(6, r.getHora_saida());
+         preparedStatement.setString(7, r.getMatricula());
         // Executa no BD        
         preparedStatement.executeUpdate();  
 
@@ -60,7 +60,7 @@ public class RegistroPontoDAO {
     }
     
     
-    public static ArrayList listar(String nome) throws SQLException, ClassNotFoundException{
+    public static ArrayList listar(String nomePesquisa) throws SQLException, ClassNotFoundException{
         
         Connection conn = null;
         PreparedStatement  preparedStatement = null;
@@ -72,13 +72,13 @@ public class RegistroPontoDAO {
         conn = ConnectionFactory.getConnection();
         
         // Comando SQL 
-        SQL = "SELECT * FROM pessoas WHERE nome LIKE ? ";
+        SQL = "SELECT * FROM tb_registroponto WHERE nome like ? ";
 
         preparedStatement = conn.prepareStatement(SQL);
         
-        nome = "%" + nome + "%";
+        nomePesquisa = "%" + nomePesquisa + "%";
         
-        preparedStatement.setString(1, nome);
+        preparedStatement.setString(1, nomePesquisa);
 
         // Para buscar informações
         rs = preparedStatement.executeQuery();   
@@ -86,14 +86,17 @@ public class RegistroPontoDAO {
         // Verifica se possui dados
         while (rs.next()) {
             
-            RegistroPonto p = new RegistroPonto();
+            RegistroPonto r = new RegistroPonto();
             
-            p.setNome(rs.getString("nome"));
+            r.setMatricula(rs.getString("matricula"));
+            r.setNome(rs.getString("nome"));
+            r.setData(rs.getString("data"));
+            r.setHora_entrada(rs.getString("hora_entrada"));
+            r.setSaida_almoco(rs.getString("saida"));
+            r.setRetorn_almoco(rs.getString("retorno"));
+            r.setHora_saida(rs.getString("hora_saida"));
             
-                    
-            //Ainda nao acabou
-                      
-            lista.add(p);
+            lista.add(r);
          } 
         
         // Fechar conexao
@@ -115,20 +118,24 @@ public class RegistroPontoDAO {
         
         // Comando SQL 
        // Comando SQL 
-        SQL = "UPDATE cliente " +
+        SQL = "UPDATE tb_registroponto " +
               " SET nome = ?, " +
-              " opcao = ?, " +
               " data = ?, " +
-              " hora = ?" +               
-              " where id_ponto = ? ";
+              " hora_entrada = ?, " +
+              " saida_almoco = ?, " +
+              " retorn_almoco = ?, " +  
+              " hora_saida = ?" +               
+              " where nome = ? ";
 
         preparedStatement = conn.prepareStatement(SQL);
 
         preparedStatement.setString(1, rp.getNome()); 
-        preparedStatement.setString(2, rp.getOpcao());
-        preparedStatement.setString(3, rp.getData()); 
-        preparedStatement.setString(4, rp.getHora());
-        preparedStatement.setInt(5,rp.getId()); 
+        preparedStatement.setString(2, rp.getData());
+        preparedStatement.setString(3, rp.getHora_entrada()); 
+        preparedStatement.setString(4, rp.getSaida_almoco());
+        preparedStatement.setString(5, rp.getRetorn_almoco());
+        preparedStatement.setString(6, rp.getHora_saida());
+        preparedStatement.setString(7, rp.getNome()); 
        
         
        // Dispara comando SQL para o banco de dados

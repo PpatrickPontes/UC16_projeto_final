@@ -12,21 +12,25 @@ package stecgames.modelo;
 public class RegistroPonto {
     private int id;
     private String matricula;
-    private String nome;
-    private String opcao;
+    private String nome;   
     private String data;
-    private String hora;
+    private String hora_entrada;
+    private String saida_almoco;
+    private String retorn_almoco;
+    private String hora_saida;
 
     public RegistroPonto() {
     }
 
-    public RegistroPonto(int id, String matricula, String nome, String opcao, String data, String hora) {
+    public RegistroPonto(int id, String matricula, String nome, String data, String hora_entrada, String saida_almoco, String retorn_almoco, String hora_saida) {
         this.id = id;
         this.matricula = matricula;
         this.nome = nome;
-        this.opcao = opcao;
         this.data = data;
-        this.hora = hora;
+        this.hora_entrada = hora_entrada;
+        this.saida_almoco = saida_almoco;
+        this.retorn_almoco = retorn_almoco;
+        this.hora_saida = hora_saida;
     }
 
     public int getId() {
@@ -53,14 +57,6 @@ public class RegistroPonto {
         this.nome = nome;
     }
 
-    public String getOpcao() {
-        return opcao;
-    }
-
-    public void setOpcao(String opcao) {
-        this.opcao = opcao;
-    }
-
     public String getData() {
         return data;
     }
@@ -69,16 +65,38 @@ public class RegistroPonto {
         this.data = data;
     }
 
-    public String getHora() {
-        return hora;
+    public String getHora_entrada() {
+        return hora_entrada;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setHora_entrada(String hora_entrada) {
+        this.hora_entrada = hora_entrada;
+    }
+
+    public String getSaida_almoco() {
+        return saida_almoco;
+    }
+
+    public void setSaida_almoco(String saida_almoco) {
+        this.saida_almoco = saida_almoco;
+    }
+
+    public String getRetorn_almoco() {
+        return retorn_almoco;
+    }
+
+    public void setRetorn_almoco(String retorn_almoco) {
+        this.retorn_almoco = retorn_almoco;
+    }
+
+    public String getHora_saida() {
+        return hora_saida;
+    }
+
+    public void setHora_saida(String hora_saida) {
+        this.hora_saida = hora_saida;
     }
 
     
-    
-            
-    
+ 
 }
