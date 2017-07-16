@@ -335,7 +335,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-     BackupImportar  importarBd = new  BackupImportar();
+     BackupExportar  importarBd = new  BackupExportar();
      JdpPrincipal.add(importarBd);
      importarBd.setLocation(JdpPrincipal.getWidth()/2 - importarBd.getWidth()/2,
                             JdpPrincipal.getHeight()/2 - importarBd.getHeight()/2);
