@@ -18,11 +18,12 @@ public class RegistroPonto {
     private String saida_almoco;
     private String retorn_almoco;
     private String hora_saida;
+    private String horasTrabDia;
 
     public RegistroPonto() {
     }
 
-    public RegistroPonto(int id, String matricula, String nome, String data, String hora_entrada, String saida_almoco, String retorn_almoco, String hora_saida) {
+    public RegistroPonto(int id, String matricula, String nome, String data, String hora_entrada, String saida_almoco, String retorn_almoco, String hora_saida, String horasTrabDia) {
         this.id = id;
         this.matricula = matricula;
         this.nome = nome;
@@ -31,6 +32,7 @@ public class RegistroPonto {
         this.saida_almoco = saida_almoco;
         this.retorn_almoco = retorn_almoco;
         this.hora_saida = hora_saida;
+        this.horasTrabDia = horasTrabDia;
     }
 
     public int getId() {
@@ -97,6 +99,13 @@ public class RegistroPonto {
         this.hora_saida = hora_saida;
     }
 
+    public String getHorasTrabDia() {
+        return horasTrabDia;
+    }
+
+    public void setHorasTrabDia(String horasTrabDia) {
+        this.horasTrabDia = horasTrabDia;
+    }
+
     
- 
 }

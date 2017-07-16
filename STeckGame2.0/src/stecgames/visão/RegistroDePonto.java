@@ -201,48 +201,179 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        
-        RegistroPonto c = new RegistroPonto();
-        
-        c.setNome(txtNome.getText());
        
-        
-        String opcao =""; 
-                
         //Entrada, Saida Almoço, Entrada Almoço, Saida         
         switch (cbOpcao.getSelectedIndex()) {
 
-                case 0:
-                   opcao = "Entrada";
-                break;
-                
-                 case 1:
-                    opcao = "Saida Almoço";
-                break;
-                
-                 case 2:
-                    opcao = "Entrada Almoço";
-                break;
-                
-                 case 3:
-                    opcao = "Saida";
-                    
-                break;
-        }       
-        c.setOpcao(opcao);
-        c.setData(txtData.getText());
-        c.setHora(txtHora.getText());
-        c.setMatricula(txtMatricula.getText());
+                case 0://Entrada
+                    RegistroPonto c = new RegistroPonto();
+                        c.setMatricula(txtMatricula.getText());
+                        c.setNome(txtNome.getText());                       
+                        c.setData(txtData.getText());                        
+                       c.setHora_entrada(txtHora.getText());
         
         try{
             RegistroPontoDAO.inserir(c);
-            JOptionPane.showMessageDialog(null, "                      Ponto registrado com sucesso! \n " +opcao+" na data "+ txtData.getText() + " as " + txtHora.getText() + " por " +txtNome.getText(), "Alerta", JOptionPane.INFORMATION_MESSAGE); 
+            JOptionPane.showMessageDialog(null, "                      Ponto registrado com sucesso! \n"+
+                                         "Entrada na data "+ txtData.getText() + " as " + txtHora.getText() + 
+                                         " por " +txtNome.getText(), "Alerta", JOptionPane.INFORMATION_MESSAGE); 
         }catch(Exception e){
             e.printStackTrace();
            
             return;
         }
+                break;
+                
+                 case 1://Saida Almoço
+                     
+                     RegistroPonto sa = new RegistroPonto();
+                        sa.setNome(txtNome.getText()); 
+                        sa.setData(txtData.getText());
+                        sa.setSaida_almoco(txtHora.getText());
+        
+       
+                try{
+                    RegistroPontoDAO.atualizarSaidAlm(sa);
+                    JOptionPane.showMessageDialog(null, "                      Ponto registrado com sucesso! \n"+
+                                         "Saida para almoço na data "+ txtData.getText() + " as " + txtHora.getText() + 
+                                         " por " +txtNome.getText(), "Alerta", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    e.printStackTrace();
+                    return;
+        }
+        
+                break;
+                                
+                 case 2://Entrada Almoço
+                     
+                    RegistroPonto rt = new RegistroPonto();
+                         rt.setNome(txtNome.getText()); 
+                         rt.setData(txtData.getText());
+                         rt.setRetorn_almoco(txtHora.getText());
+        
+                try{
+                    RegistroPontoDAO.atualizarRetdAlm(rt);
+                    JOptionPane.showMessageDialog(null, "                      Ponto registrado com sucesso! \n"+
+                                         "Retorno do almoço na data "+ txtData.getText() + " as " + txtHora.getText() + 
+                                         " por " +txtNome.getText(), "Alerta", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    e.printStackTrace();
+                    return;
+        }    
+                     
+                    
+                break;
+                
+                 case 3://Saida
+                  RegistroPonto sd = new RegistroPonto();
+                         sd.setNome(txtNome.getText()); 
+                         sd.setData(txtData.getText());
+                         sd.setHora_saida(txtHora.getText());
+        
+                try{
+                    RegistroPontoDAO.atualizarHorSaida(sd);
+                    JOptionPane.showMessageDialog(null, "                      Ponto registrado com sucesso! \n"+
+                                         "Saida na data "+ txtData.getText() + " as " + txtHora.getText() + 
+                                         " por " +txtNome.getText(), "Alerta", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    e.printStackTrace();
+                    return;
+        } 
+                
+        RegistroPonto p = null;
+        String nome =txtNome.getText();
+        String data =txtData.getText(); 
+        try{
+            p = RegistroPontoDAO.buscar(nome, data);
+        }catch(Exception e){
+            e.printStackTrace();
+            return;
+        }
+        
+        
+       String horaEnt = p.getHora_entrada();
+       String minEnt = p.getHora_entrada();
+       
+       String saiAl = p.getSaida_almoco();
+       String minSaiAl = p.getSaida_almoco();
+       
+       String retAl = p.getRetorn_almoco();
+       String retMinAl = p.getRetorn_almoco();
+       
+       String horaSai = p.getHora_saida();
+       String minSai = p.getHora_saida();
+       
+       
+        int aux1 = 0;
+        int aux2 = 0;
+        int aux3 = 0;
+        
+        int hent = 0;
+        int ment = 0;
+        
+        int hsai = 0;
+        int msai = 0;
+        
+        int hRetAl = 0;
+        int mRetAl = 0;
+        
+        int hSaida = 0;
+        int mSaida = 0;       
+                
+        
+        if(!horaEnt.isEmpty()){
+           horaEnt = horaEnt.substring(0,horaEnt.length()-6);
+           minEnt = minEnt.substring(3,minEnt.length()-3);
+           hent = Integer.parseInt(horaEnt)*60;
+           ment = Integer.parseInt(minEnt);
+        }
+        if(!saiAl.isEmpty()){
+           saiAl = saiAl.substring(0, saiAl.length()-6);
+           minSaiAl = minSaiAl.substring(3, minSaiAl.length()-3);                      
+           hsai = Integer.parseInt(saiAl)*60; 
+           msai = Integer.parseInt(minSaiAl); 
+        }
+        
+        if(!retAl.isEmpty()){
+          retAl = retAl.substring(0,retAl.length()-6);
+          retMinAl = retMinAl.substring(3,retMinAl.length()-3);
+          hRetAl = Integer.parseInt(retAl)*60;
+          mRetAl = Integer.parseInt(retMinAl);
+        }
+        
+         if(!horaSai.isEmpty()){
+          horaSai = horaSai.substring(0,horaSai.length()-6);
+          minSai = minSai.substring(3,minSai.length()-3);
+          hSaida = Integer.parseInt(horaSai)*60;
+          mSaida = Integer.parseInt(minSai);
+        }
+        
+        aux1 = (hsai+msai)-(hent+ment);
+        aux2 = (hSaida+mSaida)-(hRetAl+mRetAl);
+        aux3 = aux1 + aux2;
+       
+        int hora = aux3/60;
+        int minutos = aux3%60;
+        String hrsTrab = Integer.toString(hora);
+        String minTrab = Integer.toString(minutos);
+        String totalHoras = hora+":"+minutos;
+       // System.out.println(hora+":"+minutos);
+       
+         RegistroPonto ht = new RegistroPonto();
+                         ht.setNome(txtNome.getText()); 
+                         ht.setData(txtData.getText());
+                         ht.setHorasTrabDia(totalHoras);
+        
+                try{
+                    RegistroPontoDAO.atualizarHorasTrab(ht);
+                    JOptionPane.showMessageDialog(null, "teste","Alerta", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    e.printStackTrace();
+                    return;
+        }        
+                break;
+        }       
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

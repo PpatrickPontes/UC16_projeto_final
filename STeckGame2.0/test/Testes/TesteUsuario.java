@@ -7,14 +7,21 @@ package Testes;
 
 
 
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import stecgames.modelo.Funcionarios;
 import stecgames.modelo.RegistroPonto;
 import stecgames.persistencia.UsuarioDAO;
 import stecgames.modelo.Usuario;
+import stecgames.persistencia.ConnectionFactory;
 import stecgames.persistencia.FuncionariosDAO;
 import stecgames.persistencia.RegistroPontoDAO;
 
@@ -136,7 +143,7 @@ public class TesteUsuario {
         
   */      
     
-
+/*
      // Testar - Listar
         ArrayList<RegistroPonto> lista = null;
         
@@ -161,24 +168,52 @@ public class TesteUsuario {
                                 +rp.getRetorn_almoco()+"\n"
                                 +rp.getHora_saida());
            
-        String horaEnt = rp.getHora_entrada();
-        String horaSai = rp.getHora_saida();
-        int aux = 0;
+       String horaEnt = rp.getHora_entrada();
+       String minEnt = rp.getHora_entrada();
+       
+       String horaSai = rp.getSaida_almoco();
+       String minSai = rp.getSaida_almoco();
+        
+        int aux1 = 0;
+        int aux2 = 0;
+        int aux3 = 0;
+        
         int hent = 0;
+        int ment = 0;
+        
         int hsai = 0;
+        int msai = 0;
         
         if(!horaEnt.isEmpty()){
-           horaEnt = horaEnt.substring(6,horaEnt.length());
-           hent = Integer.parseInt(horaEnt);                 
+           horaEnt = horaEnt.substring(0,horaEnt.length()-6);
+           minEnt = minEnt.substring(3,minEnt.length()-3);
+           hent = Integer.parseInt(horaEnt)*60;
+           ment = Integer.parseInt(minEnt);
         }
         if(!horaSai.isEmpty()){
-           horaSai = horaSai.substring( horaSai.length()-6);
-           hsai = Integer.parseInt(horaSai);                 
+           horaSai = horaSai.substring(0, horaSai.length()-6);
+           minSai = minSai.substring(3, minSai.length()-3);                      
+           hsai = Integer.parseInt(horaSai)*60; 
+           msai = Integer.parseInt(minSai); 
         }
         
-        aux =  hsai - hent;
-        
-        System.out.println(aux);  
+        System.out.println(hent+ment+" "+hsai+msai);
+        aux1 = (hsai+msai)-(hent+ment);
+        aux2 = aux1/60;
+        aux3 = aux1%60;
+        System.out.println(aux1+"= Total em minutos \n"+
+                           aux2+"= Total em horas \n"+
+                           aux3+"= Total em minutos \n"+
+                           aux2+":"+aux3+"= Horas trabalhadas");
+
+       
+       
+        } 
+       
+    */   
+       
+    }
+
        /*    
         String expMes = txtDtExpedicao.getText();
         String expDia = txtDtExpedicao.getText();
@@ -191,9 +226,9 @@ public class TesteUsuario {
         } 
         */   
            
-        }
         
-     }
+        
+     
         
   
  /*
@@ -220,115 +255,95 @@ public class TesteUsuario {
                     c.getId_cliente());
         
 */
-        
-        /*
-        //-----------------------------------------------------
-        // Testar - Buscar
-        Funcionarios f = null;
-        
-        try{
-            f = FuncionariosDAO.pesquisar("Creuza");
-        }catch(Exception e){
+      
+            /*
+            //-----------------------------------------------------
+            // Testar - Atualizar
+            RegistroPonto rp = new RegistroPonto();
+            rp.setNome("Arnaldo Loureiro");
+            rp.setData("16/07/2017");
+            rp.setSaida_almoco("12:57:00");
+            
+            
+            try{
+            RegistroPontoDAO.atualizarSaidAlm(rp);
+            }catch(Exception e){
             e.printStackTrace();
             return;
-        }
-        System.out.println("Produto: " + 
-                    f.getNome());
-        
-       */
-        
-        /*
-        //-----------------------------------------------------
-        // Testar - Atualizar
-        Cliente c = new Cliente();
-        c.setId_cliente(3);
-        c.setNome("Peixe Boiado");
-        c.setTelefone("(27)80000-0000");
-        c.setRua("Rua Das Cabritas");
-        c.setBairro("Lugar nenhum");
-        c.setNumero("00");
-        c.setCondominio("Das putas");
-        c.setBloco("Bl das Putas");
-        c.setApartamento("106");
-        c.setObs_cliente("AI QUE DELICIA CARA");
-        
-       
-        try{
-            ClienteDAO.atualizar(c);
-        }catch(Exception e){
-            e.printStackTrace();
-            return;
-        }
-        
-        System.out.println("Produto alterado com sucesso: " + 
-                    c.getId_cliente());
-        
-        */
-        /*
-        //-----------------------------------------------------
-        // Testar - Excluir
-         Cliente c = new Cliente();
-        c.setId_cliente(3);
-        
-        try{
+            }
+            
+            System.out.println("Produto alterado com sucesso: ");
+            
+            */
+            /*
+            //-----------------------------------------------------
+            // Testar - Excluir
+            Cliente c = new Cliente();
+            c.setId_cliente(3);
+            
+            try{
             ClienteDAO.excluir(c);
-        }catch(Exception e){
+            }catch(Exception e){
             e.printStackTrace();
             return;
-        }
-        
-        System.out.println("Produto foi para a vala! ");
-        
-        */
-        /*
-        //-----------------------------------------------------
-        // Testar - Listar
-        ArrayList<Cliente> lista = null;
-        
-        String telefone = "9";
-        
-        try{
+            }
+            
+            System.out.println("Produto foi para a vala! ");
+            
+            */
+            /*
+            //-----------------------------------------------------
+            // Testar - Listar
+            ArrayList<Cliente> lista = null;
+            
+            String telefone = "9";
+            
+            try{
             lista = ClienteDAO.listar(telefone);
-        }catch(Exception e){
+            }catch(Exception e){
             e.printStackTrace();
             return;
-        }
-
-        for(Cliente p:lista){
-            System.out.println("Cliente: " + 
-                    p.getId_cliente()+ " - " + 
-                    p.getNome());
-        }
-      */
-       /*
-        //Transforma String em int removendo alguns caracteres
-        String palavra = "R$ 3,000.16"; 
-    if (!palavra.isEmpty())
-    palavra = palavra.substring(3, palavra.length());
-    System.out.println(palavra);
-*/
-      /*  
-        float dinheiro=1000.95f;
-        System.out.println("Só tenho R$" + dinheiro + " na minha carteira");
-*/
-        /*
-        BigDecimal valor = new BigDecimal ("3000.12");  
-        NumberFormat nf = NumberFormat.getCurrencyInstance();  
-        String formatado = nf.format (valor);
-        System.out.println(formatado);
-        //O resultado é R$ 12.000.000,12
-     */ 
-       /* 
-        //calculo de ano bi sexto
-       int ano = 1985;
+            }
+            
+            for(Cliente p:lista){
+            System.out.println("Cliente: " +
+            p.getId_cliente()+ " - " +
+            p.getNome());
+            }
+            */
+            /*
+            //Transforma String em int removendo alguns caracteres
+            String palavra = "R$ 3,000.16";
+            if (!palavra.isEmpty())
+            palavra = palavra.substring(3, palavra.length());
+            System.out.println(palavra);
+            */
+            /*
+            float dinheiro=1000.95f;
+            System.out.println("Só tenho R$" + dinheiro + " na minha carteira");
+            */
+            /*
+            BigDecimal valor = new BigDecimal ("3000.12");
+            NumberFormat nf = NumberFormat.getCurrencyInstance();
+            String formatado = nf.format (valor);
+            System.out.println(formatado);
+            //O resultado é R$ 12.000.000,12
+            */
+            /*
+            //calculo de ano bi sexto
+            int ano = 1985;
+            
+            if ( !(( ano % 4 == 0 && ano % 100 != 0 ) || ( ano % 400 == 0 )) ){
+            System.out.println("Bisexto");
+            }
+            else{
+            System.out.println("Ano normal");
+            }
+            */
+       
+    
    
-        if ( !(( ano % 4 == 0 && ano % 100 != 0 ) || ( ano % 400 == 0 )) ){
-           System.out.println("Bisexto");
-        }
-        else{
-           System.out.println("Ano normal");
-        } 
-       */ 
+    
     }
  
 
