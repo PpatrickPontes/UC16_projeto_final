@@ -5,7 +5,10 @@
  */
 package Testes;
 
+import javax.swing.JOptionPane;
+import stecgames.modelo.Funcionarios;
 import stecgames.modelo.RegistroPonto;
+import stecgames.persistencia.FuncionariosDAO;
 import stecgames.persistencia.RegistroPontoDAO;
 
 /**
@@ -18,6 +21,7 @@ public class testebuscar {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        /*
         // TODO code application logic here
         RegistroPonto p = null;
         String nome ="Arnaldo Loureiro";
@@ -70,6 +74,26 @@ public class testebuscar {
 
        
        
+    */
+        /*
+     Funcionarios p = null;
+        String nome ="Arthur Firmino";        
+        try{
+            p = FuncionariosDAO.pesquisar(nome);
+            if(p == null){
+                System.out.println("Nome não encontrado");
+                return;
+            }
+        }catch(Exception e){
+            e.printStackTrace();           
+            return;
+        }
+        
+      */
+        
+        int num1 = 01;
+        int num2 = 03;
+        System.out.println(num1+num2);
         
     }
     

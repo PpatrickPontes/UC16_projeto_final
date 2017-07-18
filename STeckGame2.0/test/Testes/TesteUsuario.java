@@ -7,8 +7,18 @@ package Testes;
 
 
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -142,9 +152,8 @@ public class TesteUsuario {
                    );
         
   */      
-    
-/*
-     // Testar - Listar
+    /*
+     // Testar - Listar somar horas trab
         ArrayList<RegistroPonto> lista = null;
         
         String palavra = "Ferdinando";
@@ -155,11 +164,25 @@ public class TesteUsuario {
             e.printStackTrace();
             return;
         }
-
+        int sum = 0;
         for(RegistroPonto rp:lista){
+            sum = sum + Integer.parseInt(rp.getHorasTrabDia());
+        }   
+             int aux = sum/60;
+       System.out.println(aux);
+           // System.out.println(sum);
+        */
+         /*
+         
+		double sum = 0;
+		for (double k: notas) 
+			sum = sum + k;
+		System.out.println(sum);
+            */
+         
           
             
-            
+        /*    
            System.out.println(rp.getMatricula()+"\n"
                                 +rp.getNome()+"\n"
                                 +rp.getData()+"\n"
@@ -208,11 +231,12 @@ public class TesteUsuario {
 
        
        
-        } 
+        }
+       */ 
        
-    */   
+     
        
-    }
+    
 
        /*    
         String expMes = txtDtExpedicao.getText();
@@ -341,9 +365,81 @@ public class TesteUsuario {
             }
             */
        
-    
+     ArrayList<RegistroPonto> lista = null;
+        
+        String palavra = "Ferdinando";
+        String arquivoPdf = "relatorio.pdf";
+         Document doc = new Document(PageSize.A4.rotate(),15,15,15,15);
+        try{
+            lista = RegistroPontoDAO.listar(palavra);
+            PdfWriter.getInstance(doc, new FileOutputStream(arquivoPdf));
+            doc.open();
+            
+            Image logo = Image.getInstance("logoSertec.png");
+            doc.add(logo);
+
+            Paragraph p = new Paragraph("Relatório de folha de ponto");
+            p.setAlignment(1);
+            doc.add(p);
+            p = new Paragraph("  ");
+            doc.add(p);
+
+            PdfPTable table = new PdfPTable(7);
+
+            PdfPCell cel1 = new PdfPCell(new Paragraph("Matricula"));
+            PdfPCell cel2 = new PdfPCell(new Paragraph("Nome"));
+            PdfPCell cel3 = new PdfPCell(new Paragraph("Data"));
+            PdfPCell cel4 = new PdfPCell(new Paragraph("Entrada"));
+            PdfPCell cel5 = new PdfPCell(new Paragraph("Saida Alm"));
+            PdfPCell cel6 = new PdfPCell(new Paragraph("Retorno Alm"));
+            PdfPCell cel7 = new PdfPCell(new Paragraph("Saida"));
+           
+
+            table.addCell(cel1);
+            table.addCell(cel2);
+            table.addCell(cel3);
+            table.addCell(cel4);
+            table.addCell(cel5);
+            table.addCell(cel6);
+            table.addCell(cel7);
+            
+            
+            int sum = 0;
+            
+            for (RegistroPonto rp : lista) {
+                cel1 = new PdfPCell(new Paragraph(rp.getMatricula()));
+                cel2 = new PdfPCell(new Paragraph(rp.getNome()));
+                cel3 = new PdfPCell(new Paragraph(rp.getData()));
+                cel4 = new PdfPCell(new Paragraph(rp.getHora_entrada()));
+                cel5 = new PdfPCell(new Paragraph(rp.getSaida_almoco()));
+                cel6 = new PdfPCell(new Paragraph(rp.getRetorn_almoco()));
+                cel7 = new PdfPCell(new Paragraph(rp.getHora_saida()));
+
+                table.addCell(cel1);
+                table.addCell(cel2);
+                table.addCell(cel3);
+                table.addCell(cel4);
+                table.addCell(cel5);
+                table.addCell(cel6);
+                table.addCell(cel7);
+                
+             sum = sum + Integer.parseInt(rp.getHorasTrabDia());   
+                
+            }
+            int aux = sum/60;
+            doc.add(table);
+             p = new Paragraph(" Local teste "+aux);
+             p.setAlignment(200);
+             doc.add(p);
+            doc.close();
+            Desktop.getDesktop().open(new File(arquivoPdf));
+        } catch (Exception e) {
+        }
+       
+           
+          
    
-    
+    }
     }
  
 

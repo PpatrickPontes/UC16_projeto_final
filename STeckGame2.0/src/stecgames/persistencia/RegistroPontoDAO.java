@@ -96,6 +96,7 @@ public class RegistroPontoDAO {
             r.setSaida_almoco(rs.getString("saida"));
             r.setRetorn_almoco(rs.getString("retorno"));
             r.setHora_saida(rs.getString("hora_saida"));
+            r.setHorasTrabDia(rs.getString("horasTrabDia"));
             
             lista.add(r);
          } 

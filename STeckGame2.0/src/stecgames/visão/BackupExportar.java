@@ -34,21 +34,21 @@ public class BackupExportar extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        beSelLocal = new javax.swing.JButton();
         txtCaminho = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         passSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btSalvarBanco = new javax.swing.JButton();
 
         setTitle("Backup de segurança - bd_stecgame");
 
-        jButton1.setText("Selecionar local de backup");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        beSelLocal.setText("Selecionar local de backup");
+        beSelLocal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                beSelLocalActionPerformed(evt);
             }
         });
 
@@ -68,7 +68,7 @@ public class BackupExportar extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(beSelLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -101,15 +101,15 @@ public class BackupExportar extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(beSelLocal)
                     .addComponent(txtCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Exportar banco de dados");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btSalvarBanco.setText("Exportar banco de dados");
+        btSalvarBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btSalvarBancoActionPerformed(evt);
             }
         });
 
@@ -123,7 +123,7 @@ public class BackupExportar extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(189, 189, 189)
-                .addComponent(jButton2)
+                .addComponent(btSalvarBanco)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -132,14 +132,14 @@ public class BackupExportar extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btSalvarBanco)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void beSelLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beSelLocalActionPerformed
         // TODO add your handling code here:
         JFileChooser ch = new JFileChooser();
         ch.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -148,9 +148,9 @@ public class BackupExportar extends javax.swing.JInternalFrame {
             String rota = ch.getSelectedFile().getPath();
             txtCaminho.setText(rota);
      }         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_beSelLocalActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btSalvarBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarBancoActionPerformed
         // TODO add your handling code here:
         DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         Date date = new Date();
@@ -174,12 +174,12 @@ public class BackupExportar extends javax.swing.JInternalFrame {
             }
         }
       } 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btSalvarBancoActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton beSelLocal;
+    private javax.swing.JButton btSalvarBanco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

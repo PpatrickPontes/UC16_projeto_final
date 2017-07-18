@@ -201,15 +201,37 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+     
+        //Entrada, Saida Almoço, Entrada Almoço, Saida 
+        
+        Funcionarios func = null;
+        String auxNome = txtNome.getText();        
+        try{
+            func  = FuncionariosDAO.pesquisar(auxNome);
+            if(func  == null){
+                JOptionPane.showMessageDialog(null, "Favor informar o nome valido ou selecionar o nome correto" , "Alerta", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }catch(Exception e){
+            e.printStackTrace();           
+            return;
+        }
+        
+        
+       if(txtNome.getText().isEmpty()){
+          JOptionPane.showMessageDialog(null, "Favor informar o nome" , "Alerta", JOptionPane.INFORMATION_MESSAGE); 
+          txtNome.requestFocus();
+          return;
+       }
        
-        //Entrada, Saida Almoço, Entrada Almoço, Saida         
         switch (cbOpcao.getSelectedIndex()) {
 
                 case 0://Entrada
+                    
                     RegistroPonto c = new RegistroPonto();
-                        c.setMatricula(txtMatricula.getText());
-                        c.setNome(txtNome.getText());                       
-                        c.setData(txtData.getText());                        
+                       c.setMatricula(txtMatricula.getText());
+                       c.setNome(txtNome.getText());                       
+                       c.setData(txtData.getText());                        
                        c.setHora_entrada(txtHora.getText());
         
         try{
@@ -352,11 +374,11 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
         aux2 = (hSaida+mSaida)-(hRetAl+mRetAl);
         aux3 = aux1 + aux2;
        
-        int hora = aux3/60;
-        int minutos = aux3%60;
-        String hrsTrab = Integer.toString(hora);
-        String minTrab = Integer.toString(minutos);
-        String totalHoras = hora+":"+minutos;
+        //int hora = aux3/60;
+        //int minutos = aux3%60;
+       // String hrsTrab = Integer.toString(hora);
+        //String minTrab = Integer.toString(minutos);
+        String totalHoras = Integer.toString(aux3);//hora+":"+minutos;
        // System.out.println(hora+":"+minutos);
        
          RegistroPonto ht = new RegistroPonto();

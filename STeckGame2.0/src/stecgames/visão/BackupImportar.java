@@ -117,7 +117,7 @@ public class BackupImportar extends javax.swing.JInternalFrame {
     String backup = "";
         if(caminho.trim().length()!=0){
             try{
-                backup = "cmd /c mysql -u"+usuario+" -p"+senha+" bd_stecgame < "+caminho;
+                backup = "C:/Program Files/MySQL/MySQL Server 5.7/bin/mysql -u"+usuario+" -p"+senha+" bd_stecgame < "+caminho;
                 Runtime rt = Runtime.getRuntime();
                 rt.exec(backup);
                 JOptionPane.showMessageDialog(null, "Backus Importado: "+caminho);
