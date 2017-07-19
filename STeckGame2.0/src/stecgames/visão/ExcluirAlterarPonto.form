@@ -111,16 +111,16 @@
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtSaidaAL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRetornoAl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtSaida" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -197,13 +197,6 @@
         <Property name="text" type="java.lang.String" value="Saida"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="txtEntrada">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format subtype="1" type="2"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtSaidaAL">
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtRetornoAl">
@@ -232,6 +225,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtData">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEntrada">
     </Component>
   </SubComponents>
 </Form>

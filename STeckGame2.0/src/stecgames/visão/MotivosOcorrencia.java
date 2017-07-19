@@ -71,7 +71,7 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtNome = new javax.swing.JLabel();
@@ -88,7 +88,7 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
         hora = new javax.swing.JLabel();
         txtData = new javax.swing.JLabel();
         txtPesqOc = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btPesquisar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblOcorrencia = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
@@ -100,10 +100,10 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("STEC GAMES | Cadastra Motivos de Ocorrência");
 
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btSalvarActionPerformed(evt);
             }
         });
 
@@ -154,10 +154,10 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
 
         txtData.setText("****");
 
-        jButton2.setText("Pesquisar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btPesquisar.setText("Pesquisar");
+        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btPesquisarActionPerformed(evt);
             }
         });
 
@@ -180,6 +180,11 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tblOcorrencia);
 
         jButton3.setText("Excluir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Motivo:");
 
@@ -193,19 +198,7 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
                         .addGap(84, 84, 84)
                         .addComponent(txtPesqOc, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel3)
-                        .addGap(23, 23, 23)
-                        .addComponent(txtMatricula)
-                        .addGap(296, 296, 296)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, 0)
-                        .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btPesquisar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(jLabel2)
@@ -232,12 +225,24 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(370, 370, 370)
-                            .addComponent(jButton1)
+                            .addComponent(btSalvar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(31, 31, 31)
-                            .addComponent(painelOutros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(painelOutros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(23, 23, 23)
+                                .addComponent(txtMatricula)
+                                .addGap(296, 296, 296)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, 0)
+                                .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
@@ -248,7 +253,7 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(txtPesqOc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2))
+                    .addComponent(btPesquisar))
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
@@ -282,15 +287,15 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
                 .addComponent(painelOutros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btSalvar)
                     .addComponent(jButton3))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
         // TODO add your handling code here:
         
          while (this.tableRegPonto.getRowCount()>0) {
@@ -314,7 +319,7 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
             this.tableRegPonto.addPessoa(f);
             
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btPesquisarActionPerformed
 
     private void tblOcorrenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOcorrenciaMouseClicked
         // TODO add your handling code here:
@@ -322,7 +327,7 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
         setarTextField();
     }//GEN-LAST:event_tblOcorrenciaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
        //inserir
         Ocorrencias o = new Ocorrencias();
@@ -353,15 +358,19 @@ public class MotivosOcorrencia extends javax.swing.JInternalFrame {
         }
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btPesquisar;
+    private javax.swing.JButton btSalvar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel hora;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

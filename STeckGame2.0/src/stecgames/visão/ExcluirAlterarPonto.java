@@ -70,7 +70,6 @@ public class ExcluirAlterarPonto extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtEntrada = new javax.swing.JFormattedTextField();
         txtSaidaAL = new javax.swing.JFormattedTextField();
         txtRetornoAl = new javax.swing.JFormattedTextField();
         txtSaida = new javax.swing.JFormattedTextField();
@@ -78,6 +77,7 @@ public class ExcluirAlterarPonto extends javax.swing.JInternalFrame {
         btExcluir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtData = new javax.swing.JFormattedTextField();
+        txtEntrada = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -123,8 +123,6 @@ public class ExcluirAlterarPonto extends javax.swing.JInternalFrame {
         jLabel7.setText("Retorno Alm.");
 
         jLabel8.setText("Saida");
-
-        txtEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
 
         btAlterar.setText("Alterar");
         btAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -215,14 +213,14 @@ public class ExcluirAlterarPonto extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSaidaAL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRetornoAl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAlterar)
                     .addComponent(btExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
@@ -343,72 +341,96 @@ public class ExcluirAlterarPonto extends javax.swing.JInternalFrame {
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
         // TODO add your handling code here:
-       String horaEnt = txtEntrada.getText();
-       String minEnt = txtEntrada.getText();
        
-       String saiAl = txtSaidaAL.getText();
-       String minSaiAl =txtSaidaAL.getText();
-       
-       String retAl = txtRetornoAl.getText();
-       String retMinAl = txtRetornoAl.getText();
-       
-       String horaSai = txtSaida.getText();
-       String minSai = txtSaida.getText();
-       
-        int aux1 = 0;
-        int aux2 = 0;
-        int aux3 = 0;
+        String en = txtEntrada.getText();
+        int pos =en.indexOf("-");
         
-        int hent = 0;
-        int ment = 0;
-        
-        int hsai = 0;
-        int msai = 0;
-        
-        int hRetAl = 0;
-        int mRetAl = 0;
-        
-        int hSaida = 0;
-        int mSaida = 0;
-        
-         if(!horaEnt.isEmpty()){
-           horaEnt = horaEnt.substring(0,horaEnt.length()-6);
-           minEnt = minEnt.substring(3,minEnt.length()-3);
-           hent = Integer.parseInt(horaEnt);
-           ment = Integer.parseInt(minEnt);
-        }
-         if(hent>23||ment>59||hent<0||ment<0){
-             JOptionPane.showMessageDialog(null, "Favor verificar a hora de entrada"+ hent, "Alerta", JOptionPane.INFORMATION_MESSAGE);
+       if(pos>-1){
+            JOptionPane.showMessageDialog(null, "Favor verificar a hora de entrada esse caracter (-) não e valido", "Alerta", JOptionPane.INFORMATION_MESSAGE);
              txtEntrada.requestFocus();
-             return;             
+             return; 
+        } 
+      if(!txtEntrada.getText().isEmpty()){
+          String horaEnt = txtEntrada.getText().substring(0,txtEntrada.getText().length()-6);
+          String minEnt = txtEntrada.getText().substring(3,txtEntrada.getText().length()-3);
+          int hent = Integer.parseInt(horaEnt);
+          int ment = Integer.parseInt(minEnt);
+          
+                if(hent>23||ment>59||hent<0||ment<0){
+                    JOptionPane.showMessageDialog(null, "Favor verificar a hora de (entrada) enrtada não valida", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+                    txtEntrada.requestFocus();
+                    return;             
          }
-         
-        if(!saiAl.isEmpty()){
-           saiAl = saiAl.substring(0, saiAl.length()-6);
-           minSaiAl = minSaiAl.substring(3, minSaiAl.length()-3);                      
-           hsai = Integer.parseInt(saiAl); 
-           msai = Integer.parseInt(minSaiAl); 
-        }
-         if(hsai>23||msai>59||hsai<0||msai<0){
-             JOptionPane.showMessageDialog(null, "Favor verificar a hora de saida almoço", "Alerta", JOptionPane.INFORMATION_MESSAGE);
-             txtEntrada.requestFocus();
-             return;
-         }             
-        /*
-        if(!retAl.isEmpty()){
-          retAl = retAl.substring(0,retAl.length()-6);
-          retMinAl = retMinAl.substring(3,retMinAl.length()-3);
-          hRetAl = Integer.parseInt(retAl)*60;
-          mRetAl = Integer.parseInt(retMinAl);
+                
+      } 
+      
+         String saiAlmoco = txtSaidaAL.getText();
+         int posi = saiAlmoco.indexOf("-");
+        
+       if(posi>-1){
+            JOptionPane.showMessageDialog(null, "Favor verificar a hora de saida almoço esse caracter (-) não e valido", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+            txtSaidaAL.requestFocus();
+             return; 
+       } 
+        if(!txtSaidaAL.getText().isEmpty()){
+          String saiAl = txtSaidaAL.getText().substring(0, txtSaidaAL.getText().length()-6);
+          String minSaiAl = txtSaidaAL.getText().substring(3, txtSaidaAL.getText().length()-3);                      
+          int hsai = Integer.parseInt(saiAl); 
+          int msai = Integer.parseInt(minSaiAl); 
+       
+            if(hsai>23||msai>59||hsai<0||msai<0){
+                JOptionPane.showMessageDialog(null, "Favor verificar a hora de (saida almoço) emtrada não valida", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+                txtSaidaAL.requestFocus();
+                return;
+         }
+            
         }
         
-         if(!horaSai.isEmpty()){
-          horaSai = horaSai.substring(0,horaSai.length()-6);
-          minSai = minSai.substring(3,minSai.length()-3);
-          hSaida = Integer.parseInt(horaSai)*60;
-          mSaida = Integer.parseInt(minSai);
+        String voltaAlmoco = txtRetornoAl.getText();
+        int posic = voltaAlmoco.indexOf("-");
+        
+       if(posic>-1){
+            JOptionPane.showMessageDialog(null, "Favor verificar a hora de (retorno do almoço) esse caracter (-) não e valido", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+             txtRetornoAl.requestFocus();
+             return; 
+       }
+       
+        if(!txtRetornoAl.getText().isEmpty()){
+          String retAl = txtRetornoAl.getText().substring(0,txtRetornoAl.getText().length()-6);
+          String retMinAl = txtRetornoAl.getText().substring(3,txtRetornoAl.getText().length()-3);
+          int hRetAl = Integer.parseInt(retAl);
+          int mRetAl = Integer.parseInt(retMinAl);
+          
+          if(hRetAl>23||mRetAl>59||hRetAl<0||mRetAl<0){
+               JOptionPane.showMessageDialog(null, "Favor verificar a hora de (retorno almoço) entrad não e valida", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+               txtRetornoAl.requestFocus();
+               return; 
+          }
+          
         }
-        */
+        
+        String saida = txtSaida.getText();
+        int posica = saida.indexOf("-");
+        
+       if(posica>-1){
+            JOptionPane.showMessageDialog(null, "Favor verificar a hora de (saida almoço) esse caracter (-) não e valido", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+             txtSaida.requestFocus();
+             return; 
+       }
+        
+         if(!txtSaida.getText().isEmpty()){
+          String horaSai = txtSaida.getText().substring(0, txtSaida.getText().length()-6);
+          String minSai =  txtSaida.getText().substring(3, txtSaida.getText().length()-3);
+          int hSaida = Integer.parseInt(horaSai);
+          int mSaida = Integer.parseInt(minSai);
+          
+           if(hSaida>23||mSaida>59||hSaida<0||mSaida<0){
+             JOptionPane.showMessageDialog(null, "Favor verificar a hora de (saida)entrada não e valida", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+              txtSaida.requestFocus();
+               return;   
+           }
+        }
+        
         
          RegistroPonto sa = new RegistroPonto();
                         sa.setNome(txtNomeSet.getText()); 
@@ -425,10 +447,11 @@ public class ExcluirAlterarPonto extends javax.swing.JInternalFrame {
                 }catch(Exception e){
                     e.printStackTrace();
                     return;
-        }
+            }        
+        
     }//GEN-LAST:event_btAlterarActionPerformed
 
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btExcluir;
@@ -442,7 +465,7 @@ public class ExcluirAlterarPonto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablePonto;
     private javax.swing.JFormattedTextField txtData;
-    private javax.swing.JFormattedTextField txtEntrada;
+    private javax.swing.JTextField txtEntrada;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeSet;
     private javax.swing.JFormattedTextField txtRetornoAl;
