@@ -5,6 +5,9 @@
  */
 package Testes;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import stecgames.modelo.Funcionarios;
 import stecgames.modelo.RegistroPonto;
@@ -90,11 +93,10 @@ public class testebuscar {
         }
         
       */
+        DecimalFormat df = new DecimalFormat("0.00"); 
+       
         
-        int num1 = 01;
-        int num2 = 03;
-        System.out.println(num1+num2);
-        
+        System.out.println(df.format(3000.506));
     }
     
 }

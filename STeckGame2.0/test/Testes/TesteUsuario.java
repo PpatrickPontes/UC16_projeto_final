@@ -7,10 +7,14 @@ package Testes;
 
 
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -22,7 +26,9 @@ import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -366,37 +372,71 @@ public class TesteUsuario {
             */
        
      ArrayList<RegistroPonto> lista = null;
-        
+        String matricula = "123";
         String palavra = "Ferdinando";
-        String arquivoPdf = "relatorio.pdf";
-         Document doc = new Document(PageSize.A4.rotate(),15,15,15,15);
+        String setor = "ADM";
+        String cargo = "Menor infeliz";        
+        String arquivoPdf = "folhadeponto"+palavra+".pdf";
+        
+         Document doc = new Document(PageSize.A4,45,15,15,45);
         try{
             lista = RegistroPontoDAO.listar(palavra);
             PdfWriter.getInstance(doc, new FileOutputStream(arquivoPdf));
             doc.open();
             
             Image logo = Image.getInstance("logoSertec.png");
+            logo.scalePercent(30);
             doc.add(logo);
 
             Paragraph p = new Paragraph("Relatório de folha de ponto");
-            p.setAlignment(1);
+            p.setAlignment(Element.ALIGN_CENTER);
             doc.add(p);
             p = new Paragraph("  ");
             doc.add(p);
-
-            PdfPTable table = new PdfPTable(7);
-
-            PdfPCell cel1 = new PdfPCell(new Paragraph("Matricula"));
-            PdfPCell cel2 = new PdfPCell(new Paragraph("Nome"));
-            PdfPCell cel3 = new PdfPCell(new Paragraph("Data"));
-            PdfPCell cel4 = new PdfPCell(new Paragraph("Entrada"));
-            PdfPCell cel5 = new PdfPCell(new Paragraph("Saida Alm"));
-            PdfPCell cel6 = new PdfPCell(new Paragraph("Retorno Alm"));
-            PdfPCell cel7 = new PdfPCell(new Paragraph("Saida"));
+            p = new Paragraph("Matricula: "+matricula);
+            doc.add(p);
+            p = new Paragraph("  ");
+            doc.add(p);
+            p = new Paragraph("Nome: "+palavra+"              Setor: "+setor+"            Cargo: "+cargo);
+            doc.add(p);
+            p = new Paragraph("  ");
+            doc.add(p);
+            
+            
+            PdfPTable table = new PdfPTable(5);
+            
+            PdfPCell cell = new PdfPCell(new Paragraph("Demonstrativo de ponto"));
+            cell.setColspan(5);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(new BaseColor(100,150,200));
            
+             
+            PdfPCell cel3 = new PdfPCell(new Paragraph("Data"));
+           //cel3.setBorder(-1);
+            cel3.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cel3.setBackgroundColor(new BaseColor(100,150,200));
+            
+            PdfPCell cel4 = new PdfPCell(new Paragraph("Entrada"));           
+            // cel4.setBorder(-1);
+            cel4.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cel4.setBackgroundColor(new BaseColor(100,150,200));
+           
+            PdfPCell cel5 = new PdfPCell(new Paragraph("Saida Alm"));            
+            //  cel5.setBorder(-1);
+            cel5.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cel5.setBackgroundColor(new BaseColor(100,150,200));
+            
+            PdfPCell cel6 = new PdfPCell(new Paragraph("Retorno Alm"));            
+            //  cel6.setBorder(-1);
+            cel6.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cel6.setBackgroundColor(new BaseColor(100,150,200));
+            
+            PdfPCell cel7 = new PdfPCell(new Paragraph("Saida"));            
+            //  cel7.setBorder(-1);
+            cel7.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cel7.setBackgroundColor(new BaseColor(100,150,200));
 
-            table.addCell(cel1);
-            table.addCell(cel2);
+            table.addCell(cell);            
             table.addCell(cel3);
             table.addCell(cel4);
             table.addCell(cel5);
@@ -407,16 +447,18 @@ public class TesteUsuario {
             int sum = 0;
             
             for (RegistroPonto rp : lista) {
-                cel1 = new PdfPCell(new Paragraph(rp.getMatricula()));
-                cel2 = new PdfPCell(new Paragraph(rp.getNome()));
+                
                 cel3 = new PdfPCell(new Paragraph(rp.getData()));
+                cel3.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cel4 = new PdfPCell(new Paragraph(rp.getHora_entrada()));
+                cel4.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cel5 = new PdfPCell(new Paragraph(rp.getSaida_almoco()));
+                cel5.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cel6 = new PdfPCell(new Paragraph(rp.getRetorn_almoco()));
+                cel6.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cel7 = new PdfPCell(new Paragraph(rp.getHora_saida()));
-
-                table.addCell(cel1);
-                table.addCell(cel2);
+                cel7.setHorizontalAlignment(Element.ALIGN_CENTER);
+                
                 table.addCell(cel3);
                 table.addCell(cel4);
                 table.addCell(cel5);
@@ -428,9 +470,98 @@ public class TesteUsuario {
             }
             int aux = sum/60;
             doc.add(table);
-             p = new Paragraph(" Local teste "+aux);
-             p.setAlignment(200);
-             doc.add(p);
+            
+             p = new Paragraph("  ");
+            doc.add(p);
+             p = new Paragraph("  ");
+            doc.add(p);
+            
+            p = new Paragraph("Carga horária mês = 176 horas mês(44 horas por semana) ");
+            p.setAlignment(Element.ALIGN_LEFT);
+            doc.add(p);
+            
+            p = new Paragraph("Horas trabalhadas = "+aux); 
+            p.setAlignment(Element.ALIGN_LEFT);
+            doc.add(p);
+            //salario baseado em 1000 reais
+            p = new Paragraph("Valor total bruto a receber = "+aux*5.68); 
+            p.setAlignment(Element.ALIGN_LEFT);
+            doc.add(p);
+            
+             DateFormat dateFormat = new SimpleDateFormat("dd");
+             Date date = new Date();
+             DateFormat mesFormat = new SimpleDateFormat("MM");
+             Date mesForm = new Date();
+             DateFormat anoFormat = new SimpleDateFormat("yyyy");
+             Date anoForm = new Date();
+             
+             String mes = mesFormat.format(mesForm);
+             String mesTxt ="";
+             
+                    switch( mes ){
+
+                   case "01":
+                           mesTxt = "Janeiro";
+                           break;
+
+                   case "02":
+                           mesTxt = "Fevereiro";
+                           break;
+                   case "03":
+                            mesTxt = "Março";
+                           break;
+                   case "04":
+                            mesTxt = "Abril";
+                           break;
+                   case "05":
+                            mesTxt = "Maio";
+                           break;
+                   case "06":
+                            mesTxt = "Junho";
+                           break;
+                   case "07":
+                            mesTxt = "Julho";
+                           break;
+                   case "08":
+                            mesTxt = "Agosto";
+                           break;
+                   case "09":
+                            mesTxt = "Setembro";
+                           break;
+                   case "10":
+                            mesTxt = "Outubro";
+                           break;
+                   case "11":
+                            mesTxt = "Novembro";
+                           break;
+                   case "12":
+                            mesTxt = "Dezembro";
+                           break;        
+                           
+
+                   
+                   default:
+                       
+                   }
+             
+             
+        //dateFormat.format(date)
+            
+            p = new Paragraph("Serra,"+dateFormat.format(date)+" de "+mesTxt+" de "+anoFormat.format(anoForm)+"                       "); 
+            p.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(p);
+            p = new Paragraph("  ");
+            doc.add(p);
+             p = new Paragraph("  ");
+            doc.add(p);
+             p = new Paragraph("  ");
+            doc.add(p);
+            p = new Paragraph("___________________________________________  ");
+             p.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(p);
+            p = new Paragraph("Assinatura do funcionario "+palavra+"                 ");
+            p.setAlignment(Element.ALIGN_RIGHT);
+            doc.add(p);
             doc.close();
             Desktop.getDesktop().open(new File(arquivoPdf));
         } catch (Exception e) {

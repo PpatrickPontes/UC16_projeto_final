@@ -121,8 +121,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         rhMenu = new javax.swing.JMenu();
         jmCadastroFunc = new javax.swing.JMenuItem();
         jmMotivosOcorrencias = new javax.swing.JMenuItem();
-        jmProsSeletivo = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        relPonto = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         vendasMenu = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -186,21 +187,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         rhMenu.add(jmCadastroFunc);
 
-        jmMotivosOcorrencias.setText("Motivos de ocorrencias");
+        jmMotivosOcorrencias.setText("Ocorrencias");
         jmMotivosOcorrencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmMotivosOcorrenciasActionPerformed(evt);
             }
         });
         rhMenu.add(jmMotivosOcorrencias);
-
-        jmProsSeletivo.setText("Processo Seletivo");
-        jmProsSeletivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmProsSeletivoActionPerformed(evt);
-            }
-        });
-        rhMenu.add(jmProsSeletivo);
 
         jMenuItem5.setText("Registro de ponto");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -209,6 +202,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         rhMenu.add(jMenuItem5);
+
+        relPonto.setText("Relatorios de ponto");
+        relPonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relPontoActionPerformed(evt);
+            }
+        });
+        rhMenu.add(relPonto);
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Alterar/excluir ponto");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        rhMenu.add(jRadioButtonMenuItem1);
 
         jMenu2.add(rhMenu);
 
@@ -263,39 +273,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmCadastroFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadastroFuncActionPerformed
-       
-        CadastroFunc tela = new CadastroFunc();
-        JdpPrincipal.add(tela);
-        tela.setLocation(
-		JdpPrincipal.getWidth()/2 - tela.getWidth()/2,
-		JdpPrincipal.getHeight()/2 - tela.getHeight()/2);
-        tela.setVisible(true);
-       
-    }//GEN-LAST:event_jmCadastroFuncActionPerformed
-
-    private void jmMotivosOcorrenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMotivosOcorrenciasActionPerformed
-       
-        MotivosOcorrencia tela = new MotivosOcorrencia();
-        JdpPrincipal.add(tela);
-        tela.setLocation(
-		JdpPrincipal.getWidth()/2 - tela.getWidth()/2,
-		JdpPrincipal.getHeight()/2 - tela.getHeight()/2);
-        tela.setVisible(true);
-       
-    }//GEN-LAST:event_jmMotivosOcorrenciasActionPerformed
-
-    private void jmProsSeletivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProsSeletivoActionPerformed
-       
-        ProcessoSeletivo tela = new ProcessoSeletivo();
-        JdpPrincipal.add(tela);
-        tela.setLocation(
-		JdpPrincipal.getWidth()/2 - tela.getWidth()/2,
-		JdpPrincipal.getHeight()/2 - tela.getHeight()/2);
-        tela.setVisible(true);
-        
-    }//GEN-LAST:event_jmProsSeletivoActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
        //Executa o log off(desliga a a tela principal)
        // Trata confirmacao de logoff
@@ -312,16 +289,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
        jMenu.setEnabled(false);
        dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        
-         RegistroDePonto tela = new RegistroDePonto();
-        JdpPrincipal.add(tela);
-        tela.setLocation(
-		JdpPrincipal.getWidth()/2 - tela.getWidth()/2,
-		JdpPrincipal.getHeight()/2 - tela.getHeight()/2);
-        tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
@@ -341,6 +308,59 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             JdpPrincipal.getHeight()/2 - importarBd.getHeight()/2);
      importarBd.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void relPontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relPontoActionPerformed
+        // TODO add your handling code here:
+        RelatorioPonto relatPonto = new RelatorioPonto();
+        JdpPrincipal.add(relatPonto);
+        relatPonto.setLocation(JdpPrincipal.getWidth()/2 - relatPonto.getWidth()/2,
+            JdpPrincipal.getHeight()/2 - relatPonto.getHeight()/2);
+        relatPonto.setVisible(true);
+    }//GEN-LAST:event_relPontoActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+
+        RegistroDePonto tela = new RegistroDePonto();
+        JdpPrincipal.add(tela);
+        tela.setLocation(
+            JdpPrincipal.getWidth()/2 - tela.getWidth()/2,
+            JdpPrincipal.getHeight()/2 - tela.getHeight()/2);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jmMotivosOcorrenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMotivosOcorrenciasActionPerformed
+
+        MotivosOcorrencia tela = new MotivosOcorrencia();
+        JdpPrincipal.add(tela);
+        tela.setLocation(
+            JdpPrincipal.getWidth()/2 - tela.getWidth()/2,
+            JdpPrincipal.getHeight()/2 - tela.getHeight()/2);
+        tela.setVisible(true);
+
+    }//GEN-LAST:event_jmMotivosOcorrenciasActionPerformed
+
+    private void jmCadastroFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadastroFuncActionPerformed
+
+        CadastroFunc tela = new CadastroFunc();
+        JdpPrincipal.add(tela);
+        tela.setLocation(
+            JdpPrincipal.getWidth()/2 - tela.getWidth()/2,
+            JdpPrincipal.getHeight()/2 - tela.getHeight()/2);
+        tela.setVisible(true);
+
+    }//GEN-LAST:event_jmCadastroFuncActionPerformed
+
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        ExcluirAlterarPonto tela = new ExcluirAlterarPonto();
+        JdpPrincipal.add(tela);
+        tela.setLocation(
+            JdpPrincipal.getWidth()/2 - tela.getWidth()/2,
+            JdpPrincipal.getHeight()/2 - tela.getHeight()/2);
+        tela.setVisible(true);
+
+        
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,11 +419,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenuItem jmCadastroFunc;
     private javax.swing.JMenuItem jmMotivosOcorrencias;
-    private javax.swing.JMenuItem jmProsSeletivo;
     private javax.swing.JMenu mBackup;
     private javax.swing.JMenu marketingMenu;
+    private javax.swing.JMenuItem relPonto;
     private javax.swing.JMenu rhMenu;
     private javax.swing.JMenu vendasMenu;
     // End of variables declaration//GEN-END:variables

@@ -87,6 +87,12 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nome:");
 
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNomeKeyReleased(evt);
+            }
+        });
+
         jButton1.setText("Pesquisar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,12 +380,9 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
         aux2 = (hSaida+mSaida)-(hRetAl+mRetAl);
         aux3 = aux1 + aux2;
        
-        //int hora = aux3/60;
-        //int minutos = aux3%60;
-       // String hrsTrab = Integer.toString(hora);
-        //String minTrab = Integer.toString(minutos);
-        String totalHoras = Integer.toString(aux3);//hora+":"+minutos;
-       // System.out.println(hora+":"+minutos);
+       
+        String totalHoras = Integer.toString(aux3);
+      
        
          RegistroPonto ht = new RegistroPonto();
                          ht.setNome(txtNome.getText()); 
@@ -432,6 +435,31 @@ public class RegistroDePonto extends javax.swing.JInternalFrame {
         
       setarTextField();
     }//GEN-LAST:event_tablePontoMouseClicked
+
+    private void txtNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyReleased
+        // TODO add your handling code here:
+        while (this.tableRegPonto.getRowCount()>0) {
+            
+            this.tableRegPonto.removerFunc(0); 
+            
+       }
+        
+     ArrayList<Funcionarios> lista = null;
+        
+        String nome = this.txtNome.getText(); 
+        
+        try{
+            lista = FuncionariosDAO.listar(nome);
+            }catch(Exception e){
+                e.printStackTrace();
+                return;
+        }
+
+        for(Funcionarios f:lista){          
+            this.tableRegPonto.addPessoa(f);
+            
+        }
+    }//GEN-LAST:event_txtNomeKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

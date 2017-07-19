@@ -77,7 +77,7 @@ public class RegistroPontoDAO {
 
         preparedStatement = conn.prepareStatement(SQL);
         
-        nomePesquisa = "%" + nomePesquisa + "%";
+        nomePesquisa =  nomePesquisa + "%";
         
         preparedStatement.setString(1, nomePesquisa);
 
@@ -309,8 +309,8 @@ public class RegistroPontoDAO {
        
     } 
     
-    /*
-    public static void excluir(Cliente c) throws SQLException, ClassNotFoundException{
+    
+    public static void excluir(RegistroPonto c) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement  preparedStatement = null;
         ResultSet rs = null;
@@ -320,12 +320,13 @@ public class RegistroPontoDAO {
         conn = ConnectionFactory.getConnection();
         
         // Comando SQL 
-        SQL = "DELETE FROM cliente " +
-              " WHERE id_cliente = ? ";
+        SQL = "DELETE FROM tb_registroponto " +
+              " WHERE nome = ? AND data = ? ";
 
         preparedStatement = conn.prepareStatement(SQL);
 
-        preparedStatement.setInt(1, c.getId_cliente());
+        preparedStatement.setString(1, c.getNome());
+        preparedStatement.setString(2, c.getData());
         
         int qtdLinhas = preparedStatement.executeUpdate();  
 
@@ -337,7 +338,7 @@ public class RegistroPontoDAO {
         // Fechar conexao
         conn.close();
     }
-    */
+    
     public static RegistroPonto buscar(String nome, String data) throws SQLException, ClassNotFoundException{
         
         Connection conn = null;
